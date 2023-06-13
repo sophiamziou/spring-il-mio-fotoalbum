@@ -20,12 +20,12 @@ public class FotoApiController {
 
 	@GetMapping("/foto")
 	public ResponseEntity<List<Foto>> getFotoIndex(
-			@RequestBody(required = false) String name
+			@RequestBody(required = false) String titolo
 		) {
 		
-		List<Foto> foto = (name == null || name.isBlank())
+		List<Foto> foto = (titolo == null || titolo.isBlank())
 				? fotoService.findAll()
-				: fotoService.findByTitolo(name);
+				: fotoService.findByTitolo(titolo);
 		
 		return new ResponseEntity<>(foto, HttpStatus.OK);
 	}
