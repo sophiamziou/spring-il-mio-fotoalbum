@@ -1,12 +1,18 @@
 package org.java.demo.pojo;
 
+import java.util.Arrays;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Foto {
@@ -17,24 +23,28 @@ public class Foto {
 
 	@NotBlank(message = "Titolo della foto non può essere vuoto")
 	private String titolo;
+	
+	@NotBlank
+	@Size(min = 5, message = "La descrizione deve avere almeno 5 caratteri")
     private String descrizione;
     
     @NotBlank(message = "Url della foto non può essere vuoto")
     private String url;
     
-    
+    @NotNull(message = "Devi inserire un valore valido")
     private boolean visibile;
     
-//  @NotNull(message = "La lista delle categorie non può essere nulla")
-    private List<String> categorie;
+    @NotNull(message = "La lista delle categorie non può essere nulla")
+	@ManyToMany
+    private List<Categoria> categorie;
     
     public Foto() {}
-    public Foto(String titolo, String descrizione, String url, boolean visibile, List<String> categorie) {
+    public Foto(String titolo, String descrizione, String url, boolean visibile, Categoria... categoria) {
         setTitolo(titolo);
         setDescrizione(descrizione);
         setUrl(url);
         setVisibile(visibile);
-        setCategorie(categorie);
+        setCategorie(categoria);
     }
     
     public int getId() {
@@ -76,13 +86,26 @@ public class Foto {
         this.visibile = visibile;
     }
     
-    public List<String> getCategorie() {
+    public List<Categoria> getCategorie() {
         return categorie;
     }
     
-    public void setCategorie(List<String> categorie) {
-        this.categorie = categorie;
-    }
+    @JsonSetter
+	public void setCategorie(List<Categoria> categorie) {
+		this.categorie = categorie;
+	}
+	public void setCategorie(Categoria[] categorie) {
+		
+		setCategorie(Arrays.asList(categorie));
+	}
+	public void addCategoria(Categoria categoria) {
+		
+		getCategorie().add(categoria);
+	}
+	public void removeCategoria(Categoria categoria) {
+		
+		getCategorie().remove(categoria);
+	}
     
 	@Override
 	public String toString() {
