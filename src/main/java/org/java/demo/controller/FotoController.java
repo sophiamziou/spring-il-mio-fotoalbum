@@ -53,7 +53,7 @@ public class FotoController {
 		return "foto-create";
 	}
 	
-	@PostMapping("/admin/foto/save")
+	@PostMapping("/admin/foto/create")
 	public String saveFoto(Model model, @Valid @ModelAttribute Foto foto, BindingResult bindingResult) {
 		
 		if (bindingResult.hasErrors()) {

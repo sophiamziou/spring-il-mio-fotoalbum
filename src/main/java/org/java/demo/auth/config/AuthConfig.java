@@ -22,7 +22,7 @@ public class AuthConfig {
 		return 
 			http.csrf(c -> c.disable())
 				.authorizeHttpRequests(a -> a
-					.requestMatchers("/admin").hasAnyAuthority("ADMIN","USER")
+					.requestMatchers("/admin/**").hasAnyAuthority("ADMIN","USER")
 			        .requestMatchers("/**").permitAll()
 			).formLogin(f -> f.permitAll()
 			).logout(l -> l.logoutSuccessUrl("/")

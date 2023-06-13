@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1>Aggiungi una nuova foto</h1>
+	<form method="post">
+		<label>Titolo</label>
+		<input type="text" name="titolo">
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('titolo')}">
+			[[ ${errors.getFieldError('titolo').defaultMessage} ]]
+		</label>
+		<br>
+		<label>Descrizione</label>
+		<input type="text" name="descrizione">
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('descrizione')}">
+			[[ ${errors.getFieldError('descrizione').defaultMessage} ]]
+		</label>
+		<br>
+		<label>Url foto</label>
+		<input type="text" name="url">
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('url')}">
+			[[ ${errors.getFieldError('url').defaultMessage} ]]
+		</label>
+		<br>
+		<input type="submit" value="create"> 
+	</form>
 </body>
 </html>

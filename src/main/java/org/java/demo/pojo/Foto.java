@@ -34,7 +34,7 @@ public class Foto {
     @NotNull(message = "Devi inserire un valore valido")
     private boolean visibile;
     
-    @NotNull(message = "La lista delle categorie non può essere nulla")
+//    @NotNull(message = "La lista delle categorie non può essere nulla")
 	@ManyToMany
     private List<Categoria> categorie;
     

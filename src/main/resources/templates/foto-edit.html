@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-
+<body th:object="${foto}">
+	<h1>Modifica la tua foto:</h1>
+	<form method="post" th:action="@{/admin/foto/update/{id} (id=*{id})}">
+		<label>Titolo</label>
+		<input type="text" name="titolo" th:field="*{titolo}">
+		<br>
+		<label>Descrizione</label>
+		<input type="text" name="descrizione" th:field="*{descrizione}">
+		<br>
+		<label>Url foto</label>
+		<input type="text" name="url" th:field="*{url}">
+		<br>
+		<input type="submit" value="update"> 
+	</form>
 </body>
 </html>

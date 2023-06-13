@@ -6,7 +6,9 @@
 </head>
 <body>
 	<h1>Le nostre foto:</h1>
-	<a th:href="@{/foto/create}">Aggiungi foto</a>
+	<h4><a th:href="@{/login}">LOGIN</a></h4>
+	<h4><a th:href="@{/logout}">LOGOUT</a></h4>
+	<a th:href="@{/admin/foto/create}">Aggiungi foto</a>
 		<form action="/foto/search" method="post">
 		<input type="text" name="titolo" th:value="${titolo}">
 		<input type="submit" value="search"> 
@@ -18,9 +20,9 @@
 					[[ *{titolo} ]]
 				</a>
 				-
-				<a th:href="@{/foto/delete/{id} (id=*{id})}">Elimina</a>
+				<a th:href="@{/admin/foto/delete/{id} (id=*{id})}">Elimina</a>
 				-
-				<a th:href="@{/foto/edit/{id} (id=*{id})}">Modifica</a>
+				<a th:href="@{/admin/foto/edit/{id} (id=*{id})}">Modifica</a>
 			</div>
 			<img width="150px" th:src="*{url}">
 		</li>
