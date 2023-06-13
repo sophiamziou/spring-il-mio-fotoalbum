@@ -32,4 +32,9 @@ public class FotoService {
 		fotoRepo.delete(foto);
 	}
 	
+	public List<Foto> findByTitolo(String titolo) {
+		
+		return fotoRepo.findByTitoloContaining(titolo);
+	}
+	
 }

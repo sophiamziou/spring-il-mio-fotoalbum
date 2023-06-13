@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>My portfolio</title>
 </head>
 <body>
-
+	<h1>Le nostre foto:</h1>
+	<a th:href="@{/foto/create}">Aggiungi foto</a>
+		<form action="/foto/search" method="post">
+		<input type="text" name="titolo" th:value="${titolo}">
+		<input type="submit" value="search"> 
+	</form>
+ 	<ul>
+		<li th:each="foto : ${fotos}" th:object="${foto}" >
+			<div>
+				<a th:href="@{/foto/{id} (id=*{id})}">
+					[[ *{titolo} ]]
+				</a>
+				-
+				<a th:href="@{/foto/delete/{id} (id=*{id})}">Elimina</a>
+				-
+				<a th:href="@{/foto/edit/{id} (id=*{id})}">Modifica</a>
+			</div>
+			<img width="150px" th:src="*{url}">
+		</li>
+	</ul>
 </body>
 </html>

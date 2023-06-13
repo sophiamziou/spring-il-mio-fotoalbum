@@ -1,14 +1,19 @@
 package org.java.demo;
 
 
+import org.java.demo.auth.service.RoleService;
+import org.java.demo.auth.service.UserService;
 import org.java.demo.pojo.Categoria;
 import org.java.demo.pojo.Foto;
+import org.java.demo.auth.pojo.Role;
+import org.java.demo.auth.pojo.User;
 import org.java.demo.service.CatService;
 import org.java.demo.service.FotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class SpringIlMioFotoalbumApplication implements CommandLineRunner {
@@ -22,9 +27,29 @@ public class SpringIlMioFotoalbumApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CatService catService;
+	
+	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private UserService userService;
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		Role roleUser = new Role("USER");
+		Role roleAdmin = new Role("ADMIN");
+		
+		roleService.save(roleUser);
+		roleService.save(roleAdmin);
+		
+		String pass = new BCryptPasswordEncoder().encode("ciaociao123");
+		
+		User userUser = new User("Nadia_20", pass, roleUser);
+		User userAdmin = new User("Sophia55", pass, roleAdmin);
+		
+		userService.save(userUser);
+		userService.save(userAdmin);
 		
 		Categoria c1 = new Categoria("foto natura");
 		Categoria c2 = new Categoria("foto animali");
